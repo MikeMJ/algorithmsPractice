@@ -90,7 +90,8 @@ public class Insertion {
     }
 
     public static void main(String[] args) {
-        Character[] array = {'E', 'A', 'S', 'Y', 'Q', 'U', 'E', 'S', 'T', 'I', 'O', 'N'};
+        Character[] array = {'Y', 'U', 'T', 'S', 'S', 'Q', 'O', 'N', 'I', 'E', 'E', 'A'};
+//        Character[] array = {'E', 'A', 'S', 'Y', 'Q', 'U', 'E', 'S', 'T', 'I', 'O', 'N'};
         sort(array, true);
         show(array);
     }
