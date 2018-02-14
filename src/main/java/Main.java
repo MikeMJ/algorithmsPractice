@@ -3,7 +3,7 @@ import sorting.Insertion;
 import sorting.Selection;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException{
         Character[] array = {'E', 'A', 'S', 'Y', 'Q', 'U', 'E', 'S', 'T', 'I', 'O','N'};
         Stopwatch stopwatch = new Stopwatch();
         Insertion.sort(array,false);

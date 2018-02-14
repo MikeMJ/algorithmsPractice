@@ -1,6 +1,7 @@
 package sorting;
 
 import edu.princeton.cs.introcs.StdDraw;
+import edu.princeton.cs.introcs.StdRandom;
 
 
 import java.awt.*;
@@ -10,8 +11,7 @@ public class Selection {
     private static final int ARRAY_ITEM_WIDTH = 10;
 
     public static void sort(Comparable[] array, boolean trace) {
-        if (trace)
-            createTraceCap(array);
+        setupBars();
         int N = array.length;
         for (int i = 0; i < N; i++) {
 
@@ -20,9 +20,11 @@ public class Selection {
                 if (less(array[j], array[min]))
                     min = j;
             }
-            if (trace)
-                trace(array, i, min);
             exchange(array, i, min);
+            try {
+                Thread.sleep(500);
+            }catch (InterruptedException ex){}
+            show(array);
         }
     }
 
@@ -37,9 +39,10 @@ public class Selection {
     }
 
     private static void show(Object[] array) {
+        StdDraw.clear();
         int N = array.length;
         for (int i = 0; i < N; i++) {
-            System.out.print(array[i] + " ");
+            StdDraw.filledRectangle(0+i*20,100,5,(Double) array[i]*100);
         }
     }
 
@@ -81,10 +84,23 @@ public class Selection {
 
     }
 
+
+    private static void setupBars(){
+        StdDraw.setCanvasSize(800,500);
+        StdDraw.setXscale(0,1000);
+        StdDraw.setYscale(0,500);
+        StdDraw.setPenColor(Color.orange);
+        StdDraw.setPenRadius(10);
+    }
+
     public static void main(String[] args) {
         Character[] array = {'Y', 'U', 'T', 'S', 'S', 'Q', 'O', 'N', 'I', 'E', 'E', 'A'};
 //      Character[] array = {'E', 'A', 'S', 'Y', 'Q', 'U', 'E', 'S', 'T', 'I', 'O','N'};
-        sort(array,true);
-        show(array);
+        Double[] doubles = new Double[50];
+        for (int i = 0; i < doubles.length; i++) {
+            doubles[i] = StdRandom.uniform();
+        }
+        sort(doubles,true);
+
     }
 }

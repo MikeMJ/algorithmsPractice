@@ -1,25 +1,23 @@
 package sorting;
 
 import edu.princeton.cs.introcs.StdDraw;
+import edu.princeton.cs.introcs.StdRandom;
 
 import java.awt.*;
 
 public class Insertion {
     private static final int ARRAY_ITEM_WIDTH = 10;
 
-    public static void sort(Comparable[] array, boolean trace) {
-        if (trace)
-            createTraceCap(array);
+    public static void sort(Comparable[] array, boolean trace) throws InterruptedException{
+        setupBars();
         int N = array.length;
         for (int i = 1, j; i < N; i++) {
             for (j = i; j > 0 && less(array[j], array[j - 1]); j--) {
                 exchange(array, j, j - 1);
+                show(array);
             }
-            if (trace)
-                trace(array, i, j);
         }
-        if (trace)
-            createTraceFooter(array);
+
     }
 
     private static boolean less(Comparable x, Comparable y) {
@@ -33,10 +31,19 @@ public class Insertion {
     }
 
     private static void show(Object[] array) {
+        StdDraw.clear();
         int N = array.length;
         for (int i = 0; i < N; i++) {
-            System.out.print(array[i] + " ");
+            StdDraw.filledRectangle(0+i*20,100,5,(Double) array[i]*100);
         }
+    }
+
+    private static void setupBars(){
+        StdDraw.setCanvasSize(800,500);
+        StdDraw.setXscale(0,1000);
+        StdDraw.setYscale(0,500);
+        StdDraw.setPenColor(Color.orange);
+        StdDraw.setPenRadius(10);
     }
 
     private static void createTraceCap(Object[] array) {
@@ -89,10 +96,14 @@ public class Insertion {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)throws InterruptedException {
         Character[] array = {'Y', 'U', 'T', 'S', 'S', 'Q', 'O', 'N', 'I', 'E', 'E', 'A'};
 //        Character[] array = {'E', 'A', 'S', 'Y', 'Q', 'U', 'E', 'S', 'T', 'I', 'O', 'N'};
-        sort(array, true);
-        show(array);
+        Double[] doubles = new Double[50];
+        for (int i = 0; i < doubles.length; i++) {
+            doubles[i] = StdRandom.uniform();
+        }
+        sort(doubles, true);
+
     }
 }
